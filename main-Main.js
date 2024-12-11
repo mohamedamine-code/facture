@@ -23,8 +23,8 @@ function generateCrystal() {
     }
   }
 function goCreateSection() {
-    window.location.href = "/facteur de blar/index.html";
+    window.location.href = "index.html";
 }  
 function goCreateSection1() {
-    window.location.href="/facteur de blar/GardCors.html";
+    window.location.href="GardCors.html";
 }
