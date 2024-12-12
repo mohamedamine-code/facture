@@ -27,6 +27,10 @@
       <option value="PORTE">PORTE</option>
     </select>
 
+    <label for="width">Prix de Metre :</label>
+    <input type="number" id="Prix_de_Metre" step="0.01" placeholder="Entrez la Prix de Metre">
+
+
     <label for="width">Largeur (m) :</label>
     <input type="number" id="width" step="0.01" placeholder="Entrez la largeur">
 
@@ -49,8 +53,8 @@
 
     <label for="typeBlar">Type de blar :</label>
     <select id="typeBlar">
-      <option value="6">6</option>
-      <option value="8">8</option>
+      <option value="simple">Simple</option>
+      <option value="double">double</option>
     </select>
 
     <label for="width">nbre:</label>
@@ -67,6 +71,17 @@
     
   </div>
 
+  <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
+<script type="text/javascript">
+(function(){
+emailjs.init({
+  publicKey: "7GMNHhMqYCkeu57YC",
+});
+})();
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
 
   <script>
 
@@ -81,26 +96,25 @@
       let couleur = document.getElementById("color").value.toLowerCase();
       let typeBlar = parseInt(document.getElementById("typeBlar").value);
       let designation = document.getElementById("designation").value.toLowerCase();
-      let number =document.getElementById("number").value;
+      let number =parseFloat(document.getElementById("number").value);
+      let Prix_de_Metre=document.getElementById("Prix_de_Metre").value;
 
-      if (isNaN(largeur) || isNaN(hauteur) || largeur <= 0 || hauteur <= 0) {
+      if (isNaN(Prix_de_Metre) || isNaN(largeur) || isNaN(hauteur) || largeur <= 0 || hauteur <= 0 || Prix_de_Metre <= 0) {
         document.getElementById("result").textContent = "Veuillez entrer des dimensions valides.";
         return;
       }
 
-      let prixParM2 = 60;
       let surface = largeur * hauteur;
-      let prixSurf = surface * prixParM2;
-      let prixCouleur = { noir: 20, blanc: 25, gris: 30, "faux bois": 40 }[couleur] || 0;
-      let prixType = type === "carré" ? 30 : 40;
-      let prixTypeBlar = typeBlar === 6 ? 10 : 20;
+      let prixSurf = surface * Prix_de_Metre;
 
-      prixTotal = number*(prixSurf + prixCouleur + prixType + prixTypeBlar);
+
+      prixTotal = number*prixSurf ;
       document.getElementById("result").textContent = `Le prix total est : ${prixTotal.toFixed(3)} TND.`;
       
     }
 
     function rest() {
+      document.getElementById("Prix_de_Metre").value='';
       document.getElementById("number").value = '';
       document.getElementById("height").value = '';
       document.getElementById("width").value = "";
@@ -160,19 +174,6 @@
       window.location.href ="formulair-blar.html"; // Redirect to formulaire page
     }
 
-    // Function to send the email using EmailJS
-    function envoyerEmail() {
-      let params = {
-        number : document.getElementById("number").value,
-        designation: document.getElementById("designation").value,
-        largeur: document.getElementById("width").value,
-        hauteur: document.getElementById("height").value,
-        type: document.getElementById("type").value,
-        couleur: document.getElementById("color").value,
-        typeBlar: document.getElementById("typeBlar").value,
-        prix: document.getElementById("result").textContent
-      };
-    }
 
     const result= document.getElementById("result").value;
     const boxbtn = document.querySelector(".box-btn");
