@@ -51,6 +51,9 @@
     <label for="typeGardcoprs">Type de Gardcoprs  :</label>
         <input type="number" id="typeGardcoprs" placeholder="Entrez Un nombre entre 6 et 20 :">
 
+        <label for="width">Remiz :</label>
+        <input type="number" value="0" id="Remiz" step="0.01" placeholder="Entrez un Remiz ">
+    
 
     <label for="width">nbre:</label>
     <input type="number" id="number" placeholder="Entrez le nombre de fois ">
@@ -78,6 +81,11 @@ function calculerPrix() {
   const typeGardcoprs = parseInt(document.getElementById("typeGardcoprs")?.value || 0);
   const number = parseInt(document.getElementById("number").value);
   let Prix_de_Metre=document.getElementById("Prix_de_Metre").value;
+  let Remiz = parseInt(document.getElementById("Remiz").value);
+
+  if (isNaN(Remiz) || Remiz === "" || Remiz === null) {
+    Remiz = 0;
+  }  
 
   if ( isNaN(Prix_de_Metre) || isNaN(Metrage) ||   Metrage <= 0 || isNaN(number) || number <= 0 || Prix_de_Metre <= 0) {
     document.getElementById("result").textContent = "Veuillez entrer des dimensions valides.";
@@ -87,6 +95,13 @@ function calculerPrix() {
   let prixSurf = Metrage * Prix_de_Metre;
   prixTotal = number * prixSurf ;
   document.getElementById("result").textContent = `Le prix total est : ${prixTotal.toFixed(3)} TND.`;
+  if (Remiz !== 0) {
+    let prixRemiz = prixTotal - (prixTotal * Remiz / 100);
+    document.getElementById("result").textContent = `Le prix total est : ${prixRemiz.toFixed(3)} TND.`;
+  } else {
+    document.getElementById("result").textContent = `Le prix total est : ${prixTotal.toFixed(3)} TND.`;
+  }
+
 }
 
 
@@ -143,7 +158,7 @@ function calculerPrix() {
 
     // Function to redirect to formulaire page
     function gotoFormulaire() {
-      window.location.href ="formulair-GardeCorps.html"; // Redirect to formulaire page
+      window.location.href ="/facteur de blar/formulair-GardeCorps.html"; // Redirect to formulaire page
     }
     const result= document.getElementById("result").value;
     const boxbtn = document.querySelector(".box-btn");

@@ -57,6 +57,9 @@
       <option value="double">double</option>
     </select>
 
+    <label for="width">Remiz :</label>
+    <input type="number" value="0" id="Remiz" step="0.01" placeholder="Entrez un Remiz ">
+
     <label for="width">nbre:</label>
     <input type="number" id="number" step="0.01" placeholder="Entrez le nombre de fois ">
 
@@ -89,29 +92,39 @@ emailjs.init({
     let container = document.querySelector(".container");
     // Function to calculate price
     function calculerPrix() {
-      let input = document.querySelectorAll("input");
-      let largeur = parseFloat(document.getElementById("width").value);
-      let hauteur = parseFloat(document.getElementById("height").value);
-      let type = document.getElementById("type").value.toLowerCase();
-      let couleur = document.getElementById("color").value.toLowerCase();
-      let typeBlar = parseInt(document.getElementById("typeBlar").value);
-      let designation = document.getElementById("designation").value.toLowerCase();
-      let number =parseFloat(document.getElementById("number").value);
-      let Prix_de_Metre=document.getElementById("Prix_de_Metre").value;
+  let input = document.querySelectorAll("input");
+  let largeur = parseFloat(document.getElementById("width").value);
+  let hauteur = parseFloat(document.getElementById("height").value);
+  let type = document.getElementById("type").value.toLowerCase();
+  let couleur = document.getElementById("color").value.toLowerCase();
+  let typeBlar = parseInt(document.getElementById("typeBlar").value);
+  let designation = document.getElementById("designation").value.toLowerCase();
+  let number = parseFloat(document.getElementById("number").value);
+  let Prix_de_Metre = document.getElementById("Prix_de_Metre").value;
+  let Remiz = parseInt(document.getElementById("Remiz").value);
 
-      if (isNaN(Prix_de_Metre) || isNaN(largeur) || isNaN(hauteur) || largeur <= 0 || hauteur <= 0 || Prix_de_Metre <= 0) {
-        document.getElementById("result").textContent = "Veuillez entrer des dimensions valides.";
-        return;
-      }
+  // Initialiser Remiz à zéro si la valeur est NaN ou non définie
+  if (isNaN(Remiz) || Remiz === "" || Remiz === null) {
+    Remiz = 0;
+  }
 
-      let surface = largeur * hauteur;
-      let prixSurf = surface * Prix_de_Metre;
+  if (isNaN(Prix_de_Metre) || isNaN(largeur) || isNaN(hauteur) || largeur <= 0 || hauteur <= 0 || Prix_de_Metre <= 0) {
+    document.getElementById("result").textContent = "Veuillez entrer des dimensions valides.";
+    return;
+  }
 
+  let surface = largeur * hauteur;
+  let prixSurf = surface * Prix_de_Metre;
+  let prixTotal = number * prixSurf;
 
-      prixTotal = number*prixSurf ;
-      document.getElementById("result").textContent = `Le prix total est : ${prixTotal.toFixed(3)} TND.`;
-      
-    }
+  if (Remiz !== 0) {
+    let prixRemiz = prixTotal - (prixTotal * Remiz / 100);
+    document.getElementById("result").textContent = `Le prix total est : ${prixRemiz.toFixed(3)} TND.`;
+  } else {
+    document.getElementById("result").textContent = `Le prix total est : ${prixTotal.toFixed(3)} TND.`;
+  }
+}
+
 
     function rest() {
       document.getElementById("Prix_de_Metre").value='';
@@ -171,7 +184,7 @@ emailjs.init({
 
     // Function to redirect to formulaire page
     function gotoFormulaire() {
-      window.location.href ="formulair-blar.html"; // Redirect to formulaire page
+      window.location.href ="formulair.html"; // Redirect to formulaire page
     }
 
 
