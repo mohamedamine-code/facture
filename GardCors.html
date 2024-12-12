@@ -26,6 +26,8 @@
     <option value="Garde coprs">Garde coprs</option>
     <option value="Garde coprs">Escalier</option>
     </select>
+    <label for="width">Prix de Metre :</label>
+    <input type="number" id="Prix_de_Metre" step="0.01" placeholder="Entrez la Prix de Metre">
 
     <label for="width">Metrage (m) :</label>
     <input type="number" id="width" step="0.01" placeholder="Entrez la Metrage ">
@@ -75,40 +77,15 @@ function calculerPrix() {
   const couleur = document.getElementById("color").value.toLowerCase();
   const typeGardcoprs = parseInt(document.getElementById("typeGardcoprs")?.value || 0);
   const number = parseInt(document.getElementById("number").value);
+  let Prix_de_Metre=document.getElementById("Prix_de_Metre").value;
 
-  if (isNaN(Metrage) ||   Metrage <= 0 || isNaN(number) || number <= 0) {
+  if ( isNaN(Prix_de_Metre) || isNaN(Metrage) ||   Metrage <= 0 || isNaN(number) || number <= 0 || Prix_de_Metre <= 0) {
     document.getElementById("result").textContent = "Veuillez entrer des dimensions valides.";
     return;
   }
 
-  let prixParM2 = 0, prixSurf = 0, prixCouleur = 0, prixType = 0, typeGardcoprsPrice = 0;
-
-  // Pricing logic for Garde corps
-  if (typeObject === "garde coprs") {
-    prixParM2 = 60;
-    prixSurf =  Metrage * prixParM2;
-    prixCouleur = { noir: 20, blanc: 25, gris: 30, "faux bois": 40 }[couleur] || 0;
-    if (type === "carré") {
-      prixType = 30;
-    } else if (type === "rond") {
-      prixType = 40;
-    } else if (type === "cristal") {
-      prixType = 50;
-    }
-    typeGardcoprsPrice = typeGardcoprs === 6 ? 10 : typeGardcoprs === 20 ? 20 : 0;
-  }
-
-  // Pricing logic for Escalier
-  else if (typeObject === "escalier") {
-    prixParM2 = 600;
-    prixSurf = Metrage * prixParM2;
-    prixCouleur = { noir: 20, blanc: 25, gris: 30, "faux bois": 40 }[couleur] || 0;
-    prixType = type === "carré" ? 30 : 40;
-    typeGardcoprsPrice = typeGardcoprs === 6 ? 10 : 20;
-  }
-
-  // Calculate total price
-  prixTotal = number * (prixSurf + prixCouleur + prixType + typeGardcoprsPrice);
+  let prixSurf = Metrage * Prix_de_Metre;
+  prixTotal = number * prixSurf ;
   document.getElementById("result").textContent = `Le prix total est : ${prixTotal.toFixed(3)} TND.`;
 }
 
@@ -166,7 +143,7 @@ function calculerPrix() {
 
     // Function to redirect to formulaire page
     function gotoFormulaire() {
-      window.location.href ="formulair-GardeCorps.html"; // Redirect to formulaire page
+      window.location.href ="/facteur de blar/formulair-GardeCorps.html"; // Redirect to formulaire page
     }
     const result= document.getElementById("result").value;
     const boxbtn = document.querySelector(".box-btn");
