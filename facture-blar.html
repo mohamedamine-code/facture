@@ -103,13 +103,13 @@ commandes.forEach((cmd, index) => {
         <td>${cmd.type}</td>
         <td>${cmd.couleur}</td>
         <td>${cmd.typeBlar}</td>
-        <td>${parseFloat(cmd.prixTotal).toFixed(2)}</td>
+        <td>${parseFloat(cmd.prixRemiz).toFixed(3)}</td>
     `;
     tableBody.appendChild(row);
 });
 
 // Calculate and display the total price
-let total = commandes.reduce((acc, cmd) => acc + (parseFloat(cmd.prixTotal) || 0), 0);
+let total = commandes.reduce((acc, cmd) => acc + (parseFloat(cmd.prixRemiz) || 0), 0);
 document.getElementById("prixTotal").innerText = total.toFixed(2);
 
 // Reset functionality
