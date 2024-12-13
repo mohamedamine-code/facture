@@ -107,45 +107,60 @@ function calculerPrix() {
 
     // Function to add the order to localStorage and redirect to invoice page
     function AddCommande() {
-  let Metrage = parseFloat(document.getElementById("width").value);
-  let type = document.getElementById("type").value.toLowerCase();
-  let couleur = document.getElementById("color").value.toLowerCase();
-  let typeBlar = parseInt(document.getElementById("type").value);
-  let typeObject = document.getElementById("designation").value.toLowerCase();
-  let number = document.getElementById("number").value;
-  const typeGardcoprs = parseInt(document.getElementById("typeGardcoprs").value);
+  const Metrage = parseFloat(document.getElementById("width").value);
+  const type = document.getElementById("type").value.toLowerCase();
+  const couleur = document.getElementById("color").value.toLowerCase();
+  const typeObject = document.getElementById("designation").value.toLowerCase();
+  const number = parseInt(document.getElementById("number").value);
+  const typeGardcoprs = parseInt(document.getElementById("typeGardcoprs")?.value || 0);
+  const Prix_de_Metre = parseFloat(document.getElementById("Prix_de_Metre").value);
+  let Remiz = parseInt(document.getElementById("Remiz").value);
 
-  if (isNaN(Metrage) ||  Metrage<= 0 ) {
+  // Validate input
+  if (isNaN(Metrage) || Metrage <= 0 || isNaN(number) || number <= 0 || isNaN(Prix_de_Metre) || Prix_de_Metre <= 0) {
     document.getElementById("result").textContent = "Veuillez entrer des dimensions valides.";
     return;
   }
 
-  let commande = {
+  // Initialize Remiz if invalid
+  if (isNaN(Remiz)) {
+    Remiz = 0;
+  }
+
+  // Calculate total price and apply discount
+  const prixSurf = Metrage * Prix_de_Metre;
+  const prixTotal = number * prixSurf;
+  const prixRemiz = prixTotal - (prixTotal * Remiz / 100);
+
+  // Create the new order object
+  const commande = {
     number,
     typeObject,
     Metrage,
     type,
     couleur,
-    prixTotal: prixTotal.toFixed(3)
+    typeGardcoprs,
+    prixRemiz: prixRemiz.toFixed(3)
   };
 
-  // Retrieve existing orders
-  let commandes = JSON.parse(localStorage.getItem("commandes")) || [];
+  // Retrieve existing orders from localStorage
+  const commandes = JSON.parse(localStorage.getItem("commandes")) || [];
 
-  // Check if the current order already exists (based on all properties)
-  let exists = commandes.some(c => 
+  // Check if the current order already exists
+  const exists = commandes.some(c => 
     c.number === commande.number &&
-    c.designation === commande.designation &&
+    c.typeObject === commande.typeObject &&
     c.Metrage === commande.Metrage &&
     c.type === commande.type &&
     c.couleur === commande.couleur &&
-    c.typeBlar === commande.typeBlar &&
-    c.prixTotal === commande.prixTotal
+    c.typeGardcoprs === commande.typeGardcoprs &&
+    c.prixRemiz === commande.prixRemiz
   );
 
   if (!exists) {
     commandes.push(commande);
     localStorage.setItem("commandes", JSON.stringify(commandes));
+    document.getElementById("result").textContent = "Commande ajoutée avec succès.";
     document.getElementById("sendEmail").style.display = "block"; // Show email button
   } else {
     document.getElementById("result").textContent = "Cette commande existe déjà.";
@@ -153,12 +168,13 @@ function calculerPrix() {
 }
 
 
+
     // Function to redirect to invoice page
     
 
     // Function to redirect to formulaire page
     function gotoFormulaire() {
-      window.location.href ="/formulair-GardeCorps.html"; // Redirect to formulaire page
+      window.location.href ="/facteur de blar/formulair-GardeCorps.html"; // Redirect to formulaire page
     }
     const result= document.getElementById("result").value;
     const boxbtn = document.querySelector(".box-btn");
