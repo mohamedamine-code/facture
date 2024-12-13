@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="btn-retour">
-        <a class="back" href="formulair-GardeCorps.html" onclick="reset()">Retour</a>
+        <a class="back" href="/facteur de blar/formulair-GardeCorps.html" onclick="reset()">Retour</a>
     </div>
     
     <div class="container">
@@ -53,15 +53,17 @@
         </table>
 
         <!-- Total Price Table -->
+        <div class="center">
         <table id="summary-table">
             <thead>
                 <tr class="header">
-                    <th>Total Prix (TND):</th>
+                    <th id="label">Prix Total (TND):</th>
                     <th id="prixTotal">0.00</th>
                 </tr>
             </thead>
         </table>
 
+    </div>
         <div class="box-imp">
             <button class="print-button" onclick="window.print();">Imprimer la Facture</button>
             <button id="back" class="print-button" onclick="reset()">Nouvelle Facture</button>
@@ -116,7 +118,7 @@ function reset() {
     // Clear table and customer information
     tableBody.innerHTML = '';
     custommer.innerHTML = '';
-    window.location.href ="GardCors.html"
+    window.location.href ="/facteur de blar/GardCors.html"
 }
 
     </script>
