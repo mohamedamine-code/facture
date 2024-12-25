@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="btn-retour">
-        <a class="back" href="/formulair-GardeCorps.html" onclick="reset()">Retour</a>
+        <a class="back" href="/facteur de blar/formulair-GardeCorps.html" onclick="reset()">Retour</a>
     </div>
     
     <div class="container">
@@ -46,6 +46,7 @@
                     <th>Metrage (m)</th>
                     <th>Type</th>
                     <th>Couleur</th>
+                    <th>Remiz</th>
                     <th>Prix Total (TND)</th>
                 </tr>
             </thead>
@@ -101,6 +102,7 @@ commandes.forEach((cmd, index) => {
         <td>${cmd.Metrage}</td>
         <td>${cmd.type}</td>
         <td>${cmd.couleur}</td>
+        <td>${cmd.Remiz} %</td>
         <td>${parseFloat(cmd.prixRemiz).toFixed(2)}</td>
     `;
     tableBody.appendChild(row);
@@ -118,7 +120,7 @@ function reset() {
     // Clear table and customer information
     tableBody.innerHTML = '';
     custommer.innerHTML = '';
-    window.location.href ="/index-Main.html"
+    window.location.href ="/facteur de blar/GardCors.html"
 }
 
     </script>

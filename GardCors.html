@@ -140,6 +140,7 @@ function calculerPrix() {
     type,
     couleur,
     typeGardcoprs,
+    Remiz,
     prixRemiz: prixRemiz.toFixed(3)
   };
 
@@ -154,6 +155,7 @@ function calculerPrix() {
     c.type === commande.type &&
     c.couleur === commande.couleur &&
     c.typeGardcoprs === commande.typeGardcoprs &&
+    c.Remiz === commande.Remiz &&
     c.prixRemiz === commande.prixRemiz
   );
 
@@ -167,14 +169,11 @@ function calculerPrix() {
   }
 }
 
-
-
     // Function to redirect to invoice page
-    
 
     // Function to redirect to formulaire page
     function gotoFormulaire() {
-      window.location.href ="/formulair-GardeCorps.html"; // Redirect to formulaire page
+      window.location.href ="/facteur de blar/formulair-GardeCorps.html"; // Redirect to formulaire page
     }
     const result= document.getElementById("result").value;
     const boxbtn = document.querySelector(".box-btn");

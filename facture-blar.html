@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="btn-retour">
-        <a class="back" href="/formulair-blar.html" onclick="reset()">Retour</a>
+        <a class="back" href="formulair-blar.html" onclick="reset()">Retour</a>
     </div>
     
     <div class="container">
@@ -48,6 +48,7 @@
                     <th>Type</th>
                     <th>Couleur</th>
                     <th>Type de Blar</th>
+                    <th>Remiz</th>
                     <th>Prix Total (TND)</th>
                 </tr>
             </thead>
@@ -66,7 +67,7 @@
 
         <div class="box-imp">
             <button class="print-button" onclick="window.print();">Imprimer la Facture</button>
-             <button id="back" href="/formulair-blar.html" class="print-button" onclick="reset();goto()">Nouvelle Facture</button>
+            <button id="back" href="/formulair-blar.html" class="print-button" onclick="reset()">Nouvelle Facture</button>
         </div>
         
         <div class="sign">
@@ -75,9 +76,6 @@
     </div>
 
     <script >
-        function goto(){
-            window.location.href="/index-Main.html";
-        }
         // Load orders and customer data from localStorage
 let commandes = JSON.parse(localStorage.getItem("commandes")) || [];
 let commandes_formulaires = JSON.parse(localStorage.getItem("commandes_formulaires")) || [];
@@ -106,6 +104,7 @@ commandes.forEach((cmd, index) => {
         <td>${cmd.type}</td>
         <td>${cmd.couleur}</td>
         <td>${cmd.typeBlar}</td>
+        <td>${cmd.Remiz} %</td>
         <td>${parseFloat(cmd.prixRemiz).toFixed(3)}</td>
     `;
     tableBody.appendChild(row);
@@ -123,6 +122,7 @@ function reset() {
     // Clear table and customer information
     tableBody.innerHTML = '';
     custommer.innerHTML = '';
+    window.location.href ="index.html";
 }
 
     </script>
