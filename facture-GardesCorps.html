@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="btn-retour">
-        <a class="back" href="/formulair-GardeCorps.html" onclick="reset()">Retour</a>
+        <a class="back" href="/facteur de blar/formulair-GardeCorps.html" onclick="reset()">Retour</a>
     </div>
     
     <div class="container">
@@ -46,8 +46,9 @@
                     <th>Metrage (m)</th>
                     <th>Type</th>
                     <th>Couleur</th>
+                    <th>Prix Sans Remiz (TND)</th>
                     <th>Remiz</th>
-                    <th>Prix Total (TND)</th>
+                    <th>Prix Avec Remiz (TND)</th>
                 </tr>
             </thead>
             <tbody id="table-body"></tbody>
@@ -58,7 +59,12 @@
         <table id="summary-table">
             <thead>
                 <tr class="header">
-                    <th id="label">Prix Total (TND):</th>
+                    <th id="label">Prix Total Sans Remiz (TND):</th>
+                    <th id="prixTotalSAnsRemiz">0.50</th>
+                </tr>
+
+                <tr class="header">
+                    <th id="label">Prix Total Avec Remiz (TND):</th>
                     <th id="prixTotal">0.00</th>
                 </tr>
             </thead>
@@ -102,15 +108,18 @@ commandes.forEach((cmd, index) => {
         <td>${cmd.Metrage}</td>
         <td>${cmd.type}</td>
         <td>${cmd.couleur}</td>
+        <td>${parseFloat(cmd.prixTotal).toFixed(3)} TND</td>
         <td>${cmd.Remiz} %</td>
-        <td>${parseFloat(cmd.prixRemiz).toFixed(2)}</td>
+        <td style="font-weight: bold;">${parseFloat(cmd.prixRemiz).toFixed(3)} TND </td>
     `;
     tableBody.appendChild(row);
 });
 
 // Calculate and display the total price
-let total = commandes.reduce((acc, cmd) => acc + (parseFloat(cmd.prixRemiz) || 0), 0);
-document.getElementById("prixTotal").innerText = total.toFixed(2);
+let totalAvecRemiz = commandes.reduce((acc, cmd) => acc + (parseFloat(cmd.prixRemiz) || 0), 0);
+let totalSansRemiz = commandes.reduce((acc, cmd) => acc + (parseFloat(cmd.prixTotal) || 0), 0);
+document.getElementById("prixTotal").innerText = totalAvecRemiz.toFixed(2);
+document.getElementById("prixTotalSAnsRemiz").innerText = totalSansRemiz.toFixed(2);
 
 // Reset functionality
 function reset() {
@@ -120,7 +129,7 @@ function reset() {
     // Clear table and customer information
     tableBody.innerHTML = '';
     custommer.innerHTML = '';
-    window.location.href ="/index-Main.html"
+    window.location.href ="/index-Main.html";
 }
 
     </script>
