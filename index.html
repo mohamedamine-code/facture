@@ -36,12 +36,21 @@
 
     <label for="height">Hauteur (m) :</label>
     <input type="number" id="height" step="0.01" placeholder="Entrez la hauteur">
-
-    <label for="type">Type (carré ou rond) :</label>
+<div class="cond">
+    <label for="type">Type (Colis ou Ouvrent) :</label>
     <select id="type">
-      <option value="carré">Carré</option>
-      <option value="rond">Rond</option>
+      <option value="OUVRIANT">Ouvrent</option>
+      <option value="COLIS">Colis</option>
+
     </select>
+<!--<div >
+    <label for="typeBlar">Type de Colis :</label>
+    <select id="typeBlar">
+      <option value="simple">Avec fermeture</option>
+      <option value="double">Avec fast look</option>
+    </select>
+  </div>-->
+</div>
 
     <label for="color">Couleur :</label>
     <select id="color">
@@ -74,18 +83,7 @@
     
   </div>
 
-  <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
-
-<script type="text/javascript">
-(function(){
-emailjs.init({
-  publicKey: "7GMNHhMqYCkeu57YC",
-});
-})();
-</script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-
-
   <script>
 
     let prixTotal = 0; // Global variable to store total price
@@ -145,6 +143,8 @@ function AddCommande() {
   let number = parseInt(document.getElementById("number").value);
   let Prix_de_Metre = parseFloat(document.getElementById("Prix_de_Metre").value);
   let Remiz = parseInt(document.getElementById("Remiz").value);
+  let typeColis = document.getElementById("typeColis") ? document.getElementById("typeColis").value.trim() : null;
+
 
   if (isNaN(Remiz)) {
     Remiz = 0;
@@ -172,6 +172,7 @@ function AddCommande() {
     largeur,
     hauteur,
     type,
+    typeColis,
     couleur,
     typeBlar,
     prixTotal,
@@ -214,7 +215,6 @@ function AddCommande() {
       window.location.href ="formulair-blar.html"; // Redirect to formulaire page
     }
 
-
     const result= document.getElementById("result").value;
     const boxbtn = document.querySelector(".box-btn");
     const btncalculePrix= document.getElementById ("btn-calculePrix");
@@ -238,6 +238,35 @@ function AddCommande() {
     }
   }
 }
+
+const type_colis = document.querySelector("#type");
+const cond = document.querySelector(".cond");
+
+type_colis.addEventListener("change", function (e) {
+  // Check if the selected value is "COLIS" and avoid duplicates
+  if (e.target.value === "COLIS" && !cond.querySelector("#typeBlar")) {
+    const div_label = document.createElement("div");
+    div_label.classList.add("dynamic-typeBlar"); // Add a class for easier targeting
+    div_label.innerHTML = `
+      <label for="typeBlar" class="tmp1">Type de Colis :</label>
+      <select id="typeColis">
+        <option value="Avec fermeture">Avec fermeture</option>
+        <option value="Avec fast look">Avec fast look</option>
+      </select>
+    `;
+    cond.appendChild(div_label);
+  }
+
+  // If "OUVRIANT" is selected, remove the dynamically created section
+  if (e.target.value === "OUVRIANT") {
+    const dynamicTypeBlar = cond.querySelector(".dynamic-typeBlar");
+    if (dynamicTypeBlar) {
+      dynamicTypeBlar.remove();
+      
+    }
+  }
+});
+
 
 
 
