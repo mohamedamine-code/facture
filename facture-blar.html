@@ -46,6 +46,7 @@
                     <th>Largeur (m)</th>
                     <th>Hauteur (m)</th>
                     <th>Type</th>
+                    <th>Type de colis</th>
                     <th>Couleur</th>
                     <th>Type de Blar</th>
                     <th>Prix Total Sans Remiz (TND)</th>
@@ -103,13 +104,14 @@ commandes_formulaires.forEach(cmd => {
 commandes.forEach((cmd, index) => {
     let row = document.createElement("tr");
     console.log(cmd)
-    if(cmd.type === "ouvriant"){
+    if(cmd.type === "Ouvrent"){
     row.innerHTML = `
         <td>${index + 1}</td>
         <td>${cmd.designation}</td>
         <td>${cmd.largeur}</td>
         <td>${cmd.hauteur}</td>
         <td>${cmd.type}</td>
+        <td> -- </td>
         <td>${cmd.couleur}</td>
         <td>${cmd.typeBlar}</td>
         <td>${parseFloat(cmd.prixTotal).toFixed(3)} TND </td>
@@ -151,45 +153,8 @@ function reset() {
     // Clear table and customer information
     tableBody.innerHTML = '';
     custommer.innerHTML = '';
-    window.location.href ="index-Main.html";
+    window.location.href ="/index-Main.html";
 }
-
-
-const header = document.querySelector("#orders-table thead tr");
-
-function test() {
-    let test = localStorage.getItem("commandes");
-
-    if (test) {
-        test = JSON.parse(test); // Parse the stored data
-
-        // Log the parsed data to check if it contains the expected format
-        console.log(test);
-
-        // Check if any item has a type equal to "colis"
-        if (test.some(item => item.type === "colis")) {
-            // Find the "Type" column index
-            const typeColumnIndex = Array.from(header.children).findIndex(th => th.textContent === "Type");
-
-            if (typeColumnIndex !== -1) {
-                // Create the new header cell
-                let th = document.createElement("th");
-                th.textContent = "Type de Colis";
-
-                // Insert the new column after the "Type" column
-                header.insertBefore(th, header.children[typeColumnIndex + 1]);
-                console.log("Column 'Type de Colis' added after 'Type'.");
-            }
-        }
-    } else {
-        console.log("No 'commandes' data found in localStorage.");
-    }
-}
-
-test();
-
-
-
 
 
     </script>
