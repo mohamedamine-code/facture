@@ -1,0 +1,300 @@
+body {
+    background-color: #fff;
+    font-family: Arial, sans-serif;
+
+    color: black;
+    margin: 0;
+    height: 100%;
+    background-image: url(/123/3a6a6d69883cae4e17d25f4a611ae0eb.jpg);
+
+}
+
+.container {
+    height: 120vh;
+    padding: 10px;
+    border-radius: 8px;
+
+}
+
+h1 {
+    text-align: center;
+    color: black;
+    font-size: 40px;
+    margin: 0px;
+    padding: 0px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 12px; /* Reduce font size */
+    text-align: left;
+}
+
+th, td {
+  padding: 5px; /* Reduce padding */
+  border: 1px solid #ddd;
+  font-size: 17px;
+  white-space: nowrap; /* Prevents text wrapping */
+  overflow: hidden;
+}
+
+th {
+    background-color: #f2f2f2;
+    color: #333;
+    font-size: 14px;
+}
+
+
+
+tr:hover {
+    background-color: #9f5109;
+}
+
+.header {
+    font-weight: bold;
+}
+
+.print-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #ff7b00;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+#back{
+    position:relative;
+    width: 1;
+}
+.header-nav{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+.main-creatur{
+    display: flex;
+    justify-content: space-between;
+}
+
+#label{
+    width: 150px !important;
+}
+.center{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+tr{
+    border-radius: 20px;
+
+}
+
+#summary-table{
+    width: 50%;
+
+}
+.box-tap{
+    display: flex;
+}
+.back{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 10px 20px;
+    background-color: #ff7b00;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.container {
+  height: 100%;
+  margin: 10px 40px;
+}
+
+.box-imp{
+    display: flex;
+    position: relative;
+    bottom: 0;
+}
+.highlight{
+    color: #e60000;
+}
+
+@media print {
+  .print-button, .back {
+      display: none;
+  }
+  table {
+      transform: scale(0.9); /* Scale down the table */
+      transform-origin: top left;
+  }
+  body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    flex-grow: 1; /* Permet au contenu principal de prendre tout l'espace disponible */
+}
+
+footer {
+    width: 100%;
+    background-color: #f1f1f1; /* Ajuste selon ton design */
+    padding: 10px;
+    text-align: center;
+}
+
+}
+.sign{
+    position: absolute;
+    right: 70px;
+
+}
+.sign p{
+    position: relative;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+@media  screen and (max-width: 490px) {
+    body{
+      margin: 1px auto;
+      width: 150%;
+    }
+    }
+
+    @media screen and (max-width: 324px) {
+      body{
+        width: 200%;
+      }
+    }
+
+
+@media screen and (max-width: 270px) {
+  body{
+    width: 200%;
+  }
+  
+}
+
+h4{
+  font-size: 25px;
+  letter-spacing: 2px;
+  margin: 0;
+  margin-top: 5px;
+}
+
+.describition{
+  width: 320px;
+  letter-spacing: 2px;
+  border-top: 3px solid  #9f5109;
+  padding-top: 10px;
+  margin: 0;
+  margin-top: 5px;
+}
+
+
+
+footer .F1{
+  display: flex;
+  justify-content: center;
+
+}
+.ligne{
+  display: flex;
+  width: 100%;
+  background-color: #9f5109;
+  height: 2px;
+}
+
+.sign {
+  position: relative;
+  display: flex;
+  right: 70px;
+  flex-direction: row-reverse;
+}
+
+.sign p{
+  display: flex;
+  align-items: center;
+  border-left: 3px solid  #9f5109;
+  height: 30px;
+  padding-left: 5px;
+  padding-bottom: 74px;
+}
+
+img{
+  position: absolute;
+  top: 0;
+  right:0;
+  max-width: 220px;
+  max-height: 220px;
+}
+
+.txt-footer{
+  margin-top: 10px;
+  border-top: 1px solid  #9f5109;
+}
+.custommer{
+  border-left: 2px solid  #9f5109;
+  padding-left: 10px;
+}
+  footer {
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    /* background-color: #f1f1f1; */
+    padding: 20px;
+    text-align: center;
+  }
+  #totale {
+    font-weight: 600;
+    font-size: 20px;
+  }
+  #p_total{
+    display: flex;
+    gap: 2%;
+    padding: 10px;
+    border: solid 2px;
+    width: 385px;
+    font-size: 20px;
+  }
+
+  body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+
+body, html {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  flex-grow: 1; /* Permet au contenu principal de prendre tout l'espace disponible */
+}
+
+footer {
+  width: 100%;
+ /* Ajuste selon ton design */
+  padding: 10px;
+  text-align: center;
+}
