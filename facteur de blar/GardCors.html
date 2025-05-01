@@ -20,7 +20,7 @@
     <nav class="navbar">
       <div class="logo">CrystalCraft</div>
       <ul class="nav-links">
-        <li><a href="#create">Créer Cristal</a></li>
+        <li><a href="#create">Créer verre</a></li>
         <li><a href="#features">Fonctionnalités</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -38,7 +38,7 @@
     <select id="designation">
       <option value="Garde coprs">Garde coprs</option>
       <option value="Escalier">Escalier</option>
-      <option value="Cristal">Cristal</option>
+      <option value="verre">Verre</option>
     </select>
 
     <label for="Prix_de_Metre">Prix de Metre :</label>
@@ -60,8 +60,10 @@
 
     <label for="poteau">Poteau :</label>
     <select id="poteau">
-      <option value="Avec Poteau">Avec Poteau</option>
-      <option value="Sans Poteau">Sans Poteau</option>
+      <option value="--">--</option>
+      <option value="Avec Poteau Crisstal">Avec Poteau Crisstal</option>
+      <option value="Avec Poteau Metal">Avec Poteau Metal</option>
+      
     </select>
 
     <label for="Type_blar">Type verre :</label>
@@ -98,7 +100,7 @@
     const colorLabel = document.querySelector('label[for="color"]');
 
     document.getElementById("designation").addEventListener("change", function () {
-      if (this.value === "Cristal") {
+      if (this.value === "verre") {
         typeCristalInput.style.display = "block";
         typeCristalLabel.style.display = "block";
         typeblarInput.style.display="block";

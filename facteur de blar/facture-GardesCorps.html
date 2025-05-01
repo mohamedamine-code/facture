@@ -86,7 +86,7 @@
           </tr>
         </thead>
       </table>
-      <p id="P_Peatau">Le type de Poteau : <span id="Peatau"></span></p>
+      <p id="P_Peatau">Poteau : <span id="Peatau"></span></p>
     </div>
 
     <p id="p_total">Total à payer : <span id="totale">0.00</span></p>
@@ -141,7 +141,7 @@
         <td>${cmd.designation}</td>
         <td>${cmd.Metrage}</td>
         <td>${isCristal ? (cmd.Type_blar || "--") : "--"}</td>
-        <td>${isCristal ? (cmd.typeCristal || "--") : "--"}</td> <!-- Type de Cristal -->
+        <td>${isCristal ? (cmd.typeCristal || "--") : "--"}</td> <!-- Type de verre -->
         <td>${isCristal ? "--" : (cmd.couleur || "--")}</td>     <!-- Couleur -->
         <td>${parseFloat(cmd.prixTotal).toFixed(2)} TND</td>
         <td>${cmd.Remiz} %</td>
