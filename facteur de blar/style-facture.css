@@ -135,10 +135,14 @@ tr{
   .print-button, .back {
       display: none;
   }
-  table {
+  table{
       transform: scale(0.9); /* Scale down the table */
       transform-origin: top left;
   }
+#p_total, #P_Peatau{
+  transform: scale(0.7);
+  transform-origin: top left;
+} 
   body, html {
     height: 100%;
     margin: 0;
@@ -159,6 +163,7 @@ footer {
 
 }
 .sign{
+  transform: scale(0.9);
     position: absolute;
     right: 70px;
 
@@ -298,3 +303,14 @@ footer {
   padding: 10px;
   text-align: center;
 }
+.iniline{
+  display: flex;
+  gap: 20px;
+  }
+  #P_Peatau{
+    font-size: 20px;
+    border: #333 3px solid;
+    padding: 20px;
+    width: 50%;
+    height: 25px;
+  }
