@@ -48,8 +48,8 @@
           <th>QTE</th>
           <th>Designation</th>
           <th>Metrage</th>
-        <th>Type cristal</th>
-          <th>épaisseur du cristal :</th> <!-- Add this -->
+        <th>Type verre</th>
+          <th>épaisseur du verre :</th> <!-- Add this -->
           <th>Couleur</th>         <!-- Keep this -->
           <th>Prix unitaire</th>
           <th>Remise</th>
@@ -134,7 +134,7 @@
     commandes.forEach((cmd) => {
       let row = document.createElement("tr");
 
-      const isCristal = cmd.designation.toLowerCase() === "cristal";
+      const isCristal = cmd.designation.toLowerCase() === "verre";
 
       row.innerHTML = `
         <td>${cmd.number}</td>
