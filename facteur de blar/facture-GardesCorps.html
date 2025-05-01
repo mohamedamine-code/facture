@@ -48,8 +48,8 @@
           <th>QTE</th>
           <th>Designation</th>
           <th>Metrage</th>
-
-          <th>Type de Cristal</th> <!-- Add this -->
+        <th>Type cristal</th>
+          <th>épaisseur du cristal :</th> <!-- Add this -->
           <th>Couleur</th>         <!-- Keep this -->
           <th>Prix unitaire</th>
           <th>Remise</th>
@@ -140,7 +140,7 @@
         <td>${cmd.number}</td>
         <td>${cmd.designation}</td>
         <td>${cmd.Metrage}</td>
-        
+        <td>${isCristal ? (cmd.Type_blar || "--") : "--"}</td>
         <td>${isCristal ? (cmd.typeCristal || "--") : "--"}</td> <!-- Type de Cristal -->
         <td>${isCristal ? "--" : (cmd.couleur || "--")}</td>     <!-- Couleur -->
         <td>${parseFloat(cmd.prixTotal).toFixed(2)} TND</td>

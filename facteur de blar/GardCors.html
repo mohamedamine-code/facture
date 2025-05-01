@@ -9,6 +9,10 @@
     #typeCristal, label[for="typeCristal"] {
       display: none;
     }
+    #Type_blar,label[for="Type_blar"]{
+      display: none;
+    }
+
   </style>
 </head>
 <body>
@@ -60,7 +64,13 @@
       <option value="Sans Poteau">Sans Poteau</option>
     </select>
 
-    <label for="typeCristal">Type de Cristal :</label>
+    <label for="Type_blar">Type cristal :</label>
+    <select id="Type_blar">
+      <option value="simple">Simple</option>
+      <option value="sablage">Sablage</option>
+    </select>
+
+    <label for="typeCristal">épaisseur du cristal :</label>
     <input id="typeCristal" placeholder="Entrez un nombre entre 6 et 20 :" />
 
     <label for="Remiz">Remise :</label>
@@ -80,6 +90,10 @@
   <script>
     const typeCristalInput = document.getElementById("typeCristal");
     const typeCristalLabel = document.querySelector('label[for="typeCristal"]');
+
+    const typeblarInput = document.getElementById("Type_blar");
+    const typeblarLabel = document.querySelector('label[for="Type_blar"]');
+
     const colorSelect = document.getElementById("color");
     const colorLabel = document.querySelector('label[for="color"]');
 
@@ -87,11 +101,17 @@
       if (this.value === "Cristal") {
         typeCristalInput.style.display = "block";
         typeCristalLabel.style.display = "block";
+        typeblarInput.style.display="block";
+        typeblarLabel.style.display="block";
         colorSelect.style.display = "none";
         colorLabel.style.display = "none";
+
       } else {
+
         typeCristalInput.style.display = "none";
         typeCristalLabel.style.display = "none";
+        typeblarInput.style.display="none";
+        typeblarLabel.style.display="none";
         colorSelect.style.display = "block";
         colorLabel.style.display = "block";
       }
@@ -145,6 +165,7 @@
       const Nom_de_facture = document.getElementById("Nom_de_facture").value.toUpperCase();
       const Metrage = parseFloat(document.getElementById("width").value);
       const couleur = document.getElementById("color").value.toLowerCase();
+      const Type_blar = document.getElementById("Type_blar").value.toLowerCase();
       const designation = document.getElementById("designation").value.toLowerCase();
       const number = parseInt(document.getElementById("number").value);
       const typeCristal = parseInt(document.getElementById("typeCristal").value) || 0;
@@ -164,6 +185,7 @@
       const prixRemiz = prixTotal - (prixTotal * Remiz / 100);
 
       const commande = {
+        Type_blar,
         Prix_de_Metre,
         Nom_de_facture,
         number,
