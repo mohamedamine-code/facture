@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gardcoprs Price Calculator</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    #typeCristal, label[for="typeCristal"] {
-      display: none;
-    }
-    #Type_blar,label[for="Type_blar"]{
+    #typeCristal,
+    label[for="typeCristal"] {
       display: none;
     }
 
+    #Type_blar,
+    label[for="Type_blar"] {
+      display: none;
+    }
   </style>
 </head>
+
 <body>
   <header class="header">
     <nav class="navbar">
@@ -61,9 +65,9 @@
     <label for="poteau">Poteau :</label>
     <select id="poteau">
       <option value="--">--</option>
-      <option value="Avec Poteau Crisstal">Avec Poteau Crisstal</option>
-      <option value="Avec Poteau Metal">Avec Poteau Metal</option>
-      
+      <option value="Crisstal">Avec Poteau Crisstal</option>
+      <option value="Metal">Avec Poteau Metal</option>
+
     </select>
 
     <label for="Type_blar">Type verre :</label>
@@ -103,8 +107,8 @@
       if (this.value === "verre") {
         typeCristalInput.style.display = "block";
         typeCristalLabel.style.display = "block";
-        typeblarInput.style.display="block";
-        typeblarLabel.style.display="block";
+        typeblarInput.style.display = "block";
+        typeblarLabel.style.display = "block";
         colorSelect.style.display = "none";
         colorLabel.style.display = "none";
 
@@ -112,8 +116,8 @@
 
         typeCristalInput.style.display = "none";
         typeCristalLabel.style.display = "none";
-        typeblarInput.style.display="none";
-        typeblarLabel.style.display="none";
+        typeblarInput.style.display = "none";
+        typeblarLabel.style.display = "none";
         colorSelect.style.display = "block";
         colorLabel.style.display = "block";
       }
@@ -134,34 +138,42 @@
     let prixTotal = 0;
 
     function calculerPrix() {
-      const designation = document.getElementById("designation").value.toLowerCase();
-      const Metrage = parseFloat(document.getElementById("width").value);
-      const couleur = document.getElementById("color").value.toLowerCase();
-      const typeCristal = parseInt(document.getElementById("typeCristal").value) || 0;
-      const number = parseInt(document.getElementById("number").value);
-      let Prix_de_Metre = parseFloat(document.getElementById("Prix_de_Metre").value);
-      let Remiz = parseInt(document.getElementById("Remiz").value);
-      if (isNaN(Remiz)) Remiz = 0;
+  const poteau = document.getElementById("poteau").value.toLowerCase();
+  const designation = document.getElementById("designation").value.toLowerCase();
+  const Metrage = parseFloat(document.getElementById("width").value);
+  const couleur = document.getElementById("color").value.toLowerCase();
+  const typeCristal = parseInt(document.getElementById("typeCristal").value) || 0;
+  const number = parseInt(document.getElementById("number").value);
+  let Prix_de_Metre = parseFloat(document.getElementById("Prix_de_Metre").value);
+  let Remiz = parseInt(document.getElementById("Remiz").value);
+  if (isNaN(Remiz)) Remiz = 0;
 
-      if (isNaN(Prix_de_Metre) || isNaN(Metrage) || Metrage <= 0 || isNaN(number) || number <= 0 || Prix_de_Metre <= 0) {
-        document.getElementById("result").textContent = "Veuillez entrer des dimensions valides.";
-        return;
-      }
+  if (isNaN(Prix_de_Metre) || isNaN(Metrage) || Metrage <= 0 || isNaN(number) || number <= 0 || Prix_de_Metre <= 0) {
+    document.getElementById("result").textContent = "Veuillez entrer des dimensions valides.";
+    return;
+  }
 
-      let prixSurf = Metrage * Prix_de_Metre;
-      prixTotal = number * prixSurf;
+  let prixSurf = Metrage * Prix_de_Metre;
+  let prixTotal = number * prixSurf;
 
-      let resultText = `Le prix total est : ${prixTotal.toFixed(2)} TND.`;
-      if (Remiz !== 0) {
-        let prixRemiz = prixTotal - (prixTotal * Remiz / 100);
-        resultText = `Le prix total est : ${prixRemiz.toFixed(2)} TND.`;
-      }
+  if (poteau === "crisstal") {
+    prixTotal += 20;
+  } else if (poteau === "metal") {
+    prixTotal += 30;
+  }
 
-      document.getElementById("result").textContent = resultText;
+  let resultText = `Le prix total est : ${prixTotal.toFixed(2)} TND.`;
+  if (Remiz !== 0) {
+    let prixRemiz = prixTotal - (prixTotal * Remiz / 100);
+    resultText = `Le prix total après remise (${Remiz}%) est : ${prixRemiz.toFixed(2)} TND.`;
+  }
 
-      // Show add to cart button if needed
-      addbtn();
-    }
+  document.getElementById("result").textContent = resultText;
+
+  // Show add to cart button if needed
+  addbtn();
+}
+
 
     function AddCommande() {
       const Nom_de_facture = document.getElementById("Nom_de_facture").value.toUpperCase();
@@ -244,4 +256,5 @@
     }
   </script>
 </body>
+
 </html>
