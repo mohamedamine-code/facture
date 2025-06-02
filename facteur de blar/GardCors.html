@@ -179,6 +179,7 @@
 
 
     function AddCommande() {
+      const nbr_breau=parseFloat(document.getElementById("nbr_breau").value);
       const Nom_de_facture = document.getElementById("Nom_de_facture").value.toUpperCase();
       const Metrage = parseFloat(document.getElementById("width").value);
       const couleur = document.getElementById("color").value.toLowerCase();
@@ -202,6 +203,7 @@
       const prixRemiz = prixTotal - (prixTotal * Remiz / 100);
 
       const commande = {
+        nbr_breau,
         Type_blar,
         Prix_de_Metre,
         Nom_de_facture,
@@ -258,6 +260,10 @@
       }
     }
   </script>
+
+
+
+
 </body>
 
 </html>
