@@ -99,7 +99,13 @@ function calculerPrix() {
   let prixTotal = number * surface * Prix_de_Metre;
   let prixFinal = prixTotal - (prixTotal * Remiz / 100);
 
-  document.getElementById("result").textContent = `Le prix total est : ${prixFinal.toFixed(2)} TND.`;
+let resultText = `Le prix total est : ${prixTotal.toFixed(2)} TND.`;
+  if (Remiz !== 0) {
+    let prixRemiz = prixTotal - (prixTotal * Remiz / 100);
+    resultText = `Le prix total après remise (${Remiz}%) est : ${prixRemiz.toFixed(2)} TND.`;
+  }
+
+  document.getElementById("result").textContent = resultText;
 
 }
 
