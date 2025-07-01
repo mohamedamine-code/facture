@@ -141,45 +141,45 @@
     let prixTotal = 0;
 
     function calculerPrix() {
-  const poteau = document.getElementById("poteau").value.toLowerCase();
-  const designation = document.getElementById("designation").value.toLowerCase();
-  const Metrage = parseFloat(document.getElementById("width").value);
-  const couleur = document.getElementById("color").value.toLowerCase();
-  const typeCristal = parseInt(document.getElementById("typeCristal").value) || 0;
-  const number = parseInt(document.getElementById("number").value);
-  let Prix_de_Metre = parseFloat(document.getElementById("Prix_de_Metre").value);
-  let Remiz = parseInt(document.getElementById("Remiz").value);
-  if (isNaN(Remiz)) Remiz = 0;
+      const poteau = document.getElementById("poteau").value.toLowerCase();
+      const designation = document.getElementById("designation").value.toLowerCase();
+      const Metrage = parseFloat(document.getElementById("width").value);
+      const couleur = document.getElementById("color").value.toLowerCase();
+      const typeCristal = parseInt(document.getElementById("typeCristal").value) || 0;
+      const number = parseInt(document.getElementById("number").value);
+      let Prix_de_Metre = parseFloat(document.getElementById("Prix_de_Metre").value);
+      let Remiz = parseInt(document.getElementById("Remiz").value);
+      if (isNaN(Remiz)) Remiz = 0;
 
-  if (isNaN(Prix_de_Metre) || isNaN(Metrage) || Metrage <= 0 || isNaN(number) || number <= 0 || Prix_de_Metre <= 0) {
-    document.getElementById("result").textContent = "Veuillez entrer des dimensions valides.";
-    return;
-  }
+      if (isNaN(Prix_de_Metre) || isNaN(Metrage) || Metrage <= 0 || isNaN(number) || number <= 0 || Prix_de_Metre <= 0) {
+        document.getElementById("result").textContent = "Veuillez entrer des dimensions valides.";
+        return;
+      }
 
-  let prixSurf = Metrage * Prix_de_Metre;
-  let prixTotal = number * prixSurf;
+      let prixSurf = Metrage * Prix_de_Metre;
+      let prixTotal = number * prixSurf;
 
-  if (poteau === "crisstal") {
-    prixTotal += 700;
-  } else if (poteau === "metal") {
-    prixTotal += 350;
-  }
+      if (poteau === "crisstal") {
+        prixTotal += 700;
+      } else if (poteau === "metal") {
+        prixTotal += 350;
+      }
 
-  let resultText = `Le prix total est : ${prixTotal.toFixed(2)} TND.`;
-  if (Remiz !== 0) {
-    let prixRemiz = prixTotal - (prixTotal * Remiz / 100);
-    resultText = `Le prix total après remise (${Remiz}%) est : ${prixRemiz.toFixed(2)} TND.`;
-  }
+      let resultText = `Le prix total est : ${prixTotal.toFixed(2)} TND.`;
+      if (Remiz !== 0) {
+        let prixRemiz = prixTotal - (prixTotal * Remiz / 100);
+        resultText = `Le prix total après remise (${Remiz}%) est : ${prixRemiz.toFixed(2)} TND.`;
+      }
 
-  document.getElementById("result").textContent = resultText;
+      document.getElementById("result").textContent = resultText;
 
-  // Show add to cart button if needed
-  addbtn();
-}
+      // Show add to cart button if needed
+      addbtn();
+    }
 
 
     function AddCommande() {
-      const nbr_breau=parseFloat(document.getElementById("nbr_breau").value);
+      const nbr_breau = parseFloat(document.getElementById("nbr_breau").value);
       const Nom_de_facture = document.getElementById("Nom_de_facture").value.toUpperCase();
       const Metrage = parseFloat(document.getElementById("width").value);
       const couleur = document.getElementById("color").value.toLowerCase();
@@ -199,9 +199,13 @@
       if (isNaN(Remiz)) Remiz = 0;
 
       const prixSurf = Metrage * Prix_de_Metre;
-      const prixTotal = number * prixSurf;
+      var prixTotal = number * prixSurf;
+      if (poteau === "crisstal") {
+        prixTotal += 700;
+      } else if (poteau === "metal") {
+        prixTotal += 350;
+      }
       const prixRemiz = prixTotal - (prixTotal * Remiz / 100);
-
       const commande = {
         nbr_breau,
         Type_blar,
