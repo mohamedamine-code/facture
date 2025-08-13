@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Historique des Factures</title>
+<style>
+    body {
+    background-color: #fff;
+    font-family: Arial, sans-serif;
+    color: black;
+    margin: 0;
+    height: 100%;
+    background-image: url(/123/3a6a6d69883cae4e17d25f4a611ae0eb.jpg);
+    }
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .search-box {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    input[type="text"] {
+        width: 50%;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+    .invoice {
+        background: #fff;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        padding: 15px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .invoice-header {
+        display: flex;
+        justify-content: space-between;
+        cursor: pointer;
+    }
+    .invoice-header h3 {
+        margin: 0;
+    }
+    .invoice-body {
+        display: none;
+        margin-top: 15px;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 10px;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+        font-size: 14px;
+    }
+    th {
+        background: #007BFF;
+        color: white;
+    }
+    .totals {
+        font-weight: bold;
+        text-align: right;
+        margin-top: 5px;
+    }
+    .invoice-header:hover {
+        background: #f0f0f0;
+    }
+</style>
+</head>
+<body>
+
+<h1>Historique des Factures</h1>
+
+<div class="search-box">
+    <input type="text" id="search" placeholder="Rechercher par client ou date">
+</div>
+
+<div id="invoices-container"></div>
+
+<script>
+async function loadInvoices() {
+    try {
+        const res = await fetch('http://localhost:3000/invoices');
+        const data = await res.json();
+        if (data.success) {
+            displayInvoices(data.invoices);
+        }
+    } catch (err) {
+        console.error("Erreur chargement factures :", err);
+    }
+}
+
+function displayInvoices(invoices) {
+    const container = document.getElementById("invoices-container");
+    container.innerHTML = "";
+
+    invoices.forEach((inv, index) => {
+        const div = document.createElement("div");
+        div.classList.add("invoice");
+
+        // Invoice Header
+        const header = document.createElement("div");
+        header.classList.add("invoice-header");
+        header.innerHTML = `
+            <h3>${inv.clientName}</h3>
+            <span>${new Date(inv.date).toLocaleDateString()} | Total TTC: ${inv.totalTTC} TND</span>
+        `;
+
+        header.addEventListener("click", () => {
+            body.style.display = body.style.display === "block" ? "none" : "block";
+        });
+
+        // Invoice Body
+        const body = document.createElement("div");
+        body.classList.add("invoice-body");
+
+        let itemsHTML = inv.items.map(item => `
+            <tr>
+                <td>${item.qte}</td>
+                <td>${item.designation}</td>
+                <td>${item.largeur || '-'}</td>
+                <td>${item.hauteur || '-'}</td>
+                <td>${item.type}</td>
+                <td>${item.typeColis || '-'}</td>
+                <td>${item.couleur}</td>
+                <td>${item.typeCristal}</td>
+                <td>${item.prixUnitaire}</td>
+                <td>${item.remise}</td>
+                <td>${item.montant}</td>
+                <td>${item.tva}</td>
+            </tr>
+        `).join("");
+
+        body.innerHTML = `
+            <table>
+                <thead>
+                    <tr>
+                        <th>QTE</th><th>Designation</th><th>Largeur</th><th>Hauteur</th>
+                        <th>Type</th><th>Type de colis</th><th>Couleur</th><th>Type de cristal</th>
+                        <th>Prix unitaire</th><th>Remise</th><th>Montant</th><th>TVA</th>
+                    </tr>
+                </thead>
+                <tbody>${itemsHTML}</tbody>
+            </table>
+            <div class="totals">
+                Brut HT: ${inv.brutHT} TND | TVA: ${inv.totalTVA} TND | Total TTC: ${inv.totalTTC} TND
+            </div>
+        `;
+
+        div.appendChild(header);
+        div.appendChild(body);
+        container.appendChild(div);
+    });
+}
+
+// Search functionality
+document.getElementById("search").addEventListener("input", function() {
+    const term = this.value.toLowerCase();
+    const invoices = document.querySelectorAll(".invoice");
+    invoices.forEach(inv => {
+        const text = inv.innerText.toLowerCase();
+        inv.style.display = text.includes(term) ? "" : "none";
+    });
+});
+
+loadInvoices();
+</script>
+
+</body>
+</html>

@@ -31,3 +31,6 @@ function goCreateSection1() {
 function goCreateSection2() {
   window.location.href="/facteur de blar/raideau.html";
 }
+function goCreateSection3() {
+  window.location.href="facteur de blar/Historique.html";
+}
