@@ -93,7 +93,7 @@
         <p id="p_total">Total à payer : <span><span id="totale">0.00</p>
 
         <div class="box-imp">
-            <button class="print-button" onclick="window.print();">Imprimer la Facture</button>
+            <button id="impression-btn" class="print-button" >Imprimer la Facture</button>
             <button id="back" href="/index.html" class="print-button" onclick="reset()">Nouvelle Facture</button>
         </div>
         
@@ -206,6 +206,54 @@ function reset() {
     custommer.innerHTML = '';
     window.location.href = "/index.html";
 }
+document.getElementById('impression-btn').addEventListener('click', function () {
+    // Gather invoice data from page
+    let invoiceData = {
+        clientName: commandes_formulaires.length > 0 
+            ? commandes_formulaires[0].nom + " " + commandes_formulaires[0].prenom 
+            : "Client Inconnu",
+        date: commandes_formulaires.length > 0 
+            ? commandes_formulaires[0].date 
+            : new Date().toLocaleDateString(),
+        items: commandes.map(cmd => ({
+            qte: cmd.number,
+            designation: cmd.designation,
+            largeur: cmd.largeur,
+            hauteur: cmd.hauteur,
+            type: cmd.type,
+            typeColis: cmd.typeColis || "--",
+            couleur: cmd.couleur,
+            typeCristal: cmd.typeBlar,
+            prixUnitaire: parseFloat(cmd.prixTotal).toFixed(2),
+            remise: cmd.Remiz,
+            montant: parseFloat(cmd.prixRemiz).toFixed(2),
+            tva: "19%"
+        })),
+        brutHT: total2.toFixed(2),
+        netHT: total.toFixed(2),
+        totalTVA: TVA.toFixed(2),
+        timbre: Timber.toFixed(2),
+        totalTTC: totalTTC.toFixed(2)
+    };
+
+    // Send to backend API
+    fetch('http://localhost:3000/save-invoice',{
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(invoiceData)
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            console.log("✅ Facture enregistrée dans MongoDB !");
+            window.print(); // Print after saving
+        } else {
+            console.error("❌ Erreur :", data.error);
+            alert("Impossible d'enregistrer la facture !");
+        }
+    })
+    .catch(err => console.error("❌ Erreur de connexion :", err));
+});
 
     </script>
 </body>
