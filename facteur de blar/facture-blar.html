@@ -203,7 +203,7 @@
 
         console.log("📦 Envoi de la facture :", invoiceData);
 
-        fetch('http://localhost:3000/save-invoice', {
+        fetch('https://backenf-facture.onrender.com/save-invoice', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(invoiceData)

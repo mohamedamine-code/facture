@@ -85,7 +85,7 @@
 <script>
 async function loadInvoices() {
     try {
-        const res = await fetch('http://localhost:3000/invoices');
+        const res = await fetch('https://backenf-facture.onrender.com/invoices');
         const data = await res.json();
         if (data.success) {
             displayInvoices(data.invoices);
