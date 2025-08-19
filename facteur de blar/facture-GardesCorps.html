@@ -93,7 +93,7 @@
     <p id="p_total">Total à payer : <span id="totale">0.00</span></p>
 
     <div class="box-imp">
-      <button class="print-button" onclick="window.print();">Imprimer la Facture</button>
+      <button class="print-button" id="impression-btn">Imprimer la Facture</button>
       <button id="back" class="print-button" onclick="reset()">Nouvelle Facture</button>
     </div>
 
@@ -160,6 +160,8 @@
     let totalBrut = commandes.reduce((acc, cmd) => acc + parseFloat(cmd.prixTotal || 0), 0);
     let TVA = totalRemiz * 0.19;
     let totalTTC = totalRemiz + TVA + Timber;
+    
+
 
     document.getElementById("prixTotalSAnsRemiz").innerText = `${totalBrut.toFixed(2)} TND`;
     document.getElementById("prixTotal").innerText = `${totalRemiz.toFixed(2)} TND`;
@@ -201,8 +203,8 @@
           montant: parseFloat(cmd.prixRemiz).toFixed(2),
           tva: "19%"
         })),
-        brutHT: total2.toFixed(2),
-        netHT: total.toFixed(2),
+        brutHT: totalBrut.toFixed(2),
+        netHT: totalBrut.toFixed(2),
         totalTVA: TVA.toFixed(2),
         timbre: Timber.toFixed(2),
         totalTTC: totalTTC.toFixed(2)
