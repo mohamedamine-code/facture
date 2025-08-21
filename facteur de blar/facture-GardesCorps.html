@@ -127,7 +127,10 @@
       customerInfo.innerHTML = `
         <h5>Nom: ${cmd.nom}</h5>
         <h5>Prénom: ${cmd.prenom}</h5>
-        <h5>Date: ${cmd.date}</h5>`;
+        <h5>Date: ${cmd.date}</h5>
+        <h5>Tel: ${cmd.telephone}</h5>
+        `;
+
       custommer.appendChild(customerInfo);
     });
 
@@ -185,6 +188,7 @@
 
     document.getElementById('impression-btn').addEventListener('click', function () {
       let invoiceData = {
+        clienttel:commandes_formulaires[0].telephone,
         clientName: commandes_formulaires.length > 0
           ? commandes_formulaires[0].nom + " " + commandes_formulaires[0].prenom
           : "Client Inconnu",
