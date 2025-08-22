@@ -48,11 +48,12 @@
           <th>QTE</th>
           <th>Designation</th>
           <th>Metrage</th>
-          <th>Type verre</th>
-          <th>épaisseur du verre :</th> <!-- Add this -->
+          <!-- <th>Type verre</th> -->
+          <!-- <th>épaisseur du verre :</th> Add this -->
           <th>Couleur</th> <!-- Keep this -->
           <th>Prix unitaire</th>
           <th>nbre des barreaux</th>
+          <th>Prix Peauteau</th>
           <th>Remise</th>
           <th>Montant</th>
           <th>TVA</th>
@@ -144,11 +145,10 @@
         <td>${cmd.number}</td>
         <td>${cmd.designation}</td>
         <td>${cmd.Metrage}</td>
-        <td>${isCristal ? (cmd.Type_blar || "--") : "--"}</td>
-        <td>${isCristal ? (cmd.typeCristal || "--") : "--"}</td> <!-- Type de verre -->
         <td>${isCristal ? "--" : (cmd.couleur || "--")}</td>     <!-- Couleur -->
         <td>${parseFloat(cmd.prixTotal).toFixed(2)} TND</td>
         <td>${cmd.nbr_breau}</td>
+        <td>${cmd.Prix_de_peauteau}</td>
         <td>${cmd.Remiz} %</td>
         <td style="font-weight: bold;">${parseFloat(cmd.prixRemiz).toFixed(2)} TND</td>
         <td>19 %</td>
